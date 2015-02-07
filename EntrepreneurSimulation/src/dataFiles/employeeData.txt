@@ -1,0 +1,5 @@
+{"name": "Sumit", "wage": 10}
+{"name": "Holand", "wage": 20}
+{"name": "ABC", "wage": 30}
+{"name": "Mark", "wage": 40}
+{"name": "Nemo", "wage": 50}
