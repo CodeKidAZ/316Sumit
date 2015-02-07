@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.HireController">
+   <children>
+      <Label fx:id="hireTitleLabel" layoutX="354.0" layoutY="33.0" text="HIRE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="272.0" layoutY="33.0" mnemonicParsing="false" onAction="#backMethod" prefHeight="30.0" prefWidth="63.0" text="Back" />
+      <Button fx:id="doneButton" layoutX="629.0" layoutY="524.0" mnemonicParsing="false" onAction="#doneMethod" prefHeight="30.0" prefWidth="63.0" text="Done" />
+   </children>
+</AnchorPane>
