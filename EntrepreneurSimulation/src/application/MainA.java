@@ -2,6 +2,7 @@
 package application;
 
 import controllers.*;
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Sumit
- */
 public class MainA extends Application 
 {
     private Stage primaryStage;
