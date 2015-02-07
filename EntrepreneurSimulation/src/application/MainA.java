@@ -7,12 +7,11 @@ import java.io.FileReader;
 
 import java.io.IOException;
 import static java.lang.System.in;
+import java.util.HashMap;
 import java.util.Hashtable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.json.JSONObject;
@@ -21,8 +20,9 @@ public class MainA extends Application
 {
      Stage primaryStage;
     private AnchorPane root;
-    public Hashtable<String, Employee> employees = new Hashtable<String,Employee>();
-    public Hashtable<String, Employee> employeesHired = new Hashtable<String,Employee>();
+    public static int Number = 0;
+    public static Hashtable<String, Employee> employees = new Hashtable<String,Employee>(); //to store all employee data
+    public static  HashMap<String, Employee> employeesHired = new HashMap<String,Employee>(); // to store all hired employees data
     
     @Override
     public void start(Stage primaryStage) 
@@ -38,13 +38,12 @@ public class MainA extends Application
                  JSONObject obj = new JSONObject(strLine);                  //extract employee info from datafile
                  String name = obj.get("name").toString();
                  int wage = (int)obj.get("wage");
-                 
                  Employee empObject = new Employee(name, wage);      //create employee objects
                  employees.put(name, empObject);                               //store employee object into hashtable
                  
                  //System.out.println(name + " "+wage);
                 
-            }
+            }//hashmap
             in.close();
         } 
         catch (Exception e) 
@@ -135,4 +134,9 @@ public class MainA extends Application
          }
         
     }
+
+   /*public HashMap<String,Employee> getEmployeeTable()
+   {
+       return employees;
+   }*/
 }

@@ -25,5 +25,3 @@
 {"name": "K", "wage": 35}
 {"name": "KK", "wage": 40}
 {"name": "L", "wage": 45}
-
-

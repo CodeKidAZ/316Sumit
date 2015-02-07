@@ -1,7 +1,8 @@
 package controllers;
 import application.MainA;
-
+import controllers.Employee;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -13,11 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import org.json.JSONObject;
 
 public class HireController implements Initializable 
 {
       private MainA a;
       Random random = new Random();
+     Employee val = new Employee();
     //protected Hashtable<String, Employee> employees = new Hashtable<String,Employee>();
     @FXML
     private Label hireTitleLabel;
@@ -66,18 +69,33 @@ public class HireController implements Initializable
         imageEmployee4.setImage(image);
         imageEmployee5.setImage(image);
         
-        int size = employees.keySet().size();
-        int index=(int)(Math.random() * size)+1;
-        System.out.println(index);
-        for(Integer i : map.keySet()){
-            if(index==1){
-                System.out.println(i);
-                break;
+        Enumeration<String> enumKey = MainA.employees.keys();
+        while (enumKey.hasMoreElements()) 
+        {
+            String key = enumKey.nextElement();
+            val = MainA.employees.get(key);
+            
+            nameLabel1.setText(val.getName());
+            nameLabel2.setText(val.getName());
+            nameLabel3.setText(val.getName());
+            nameLabel4.setText(val.getName());
+            nameLabel5.setText(val.getName());
+            
             }
-            else{
-                index--;
-            }
+       for(int i=0;i<=26; i++)
+        {
+            String name = "nameLabel"+i;
+            System.out.println("name is "+name);
+          
+            //nameLabel1.setText(MainA.employees.getValueAt(i).toString());
+             System.out.println(MainA.employees.size());
         }
+       
+     
+        
+        
+        
+     
       
         
         System.out.println(System.getProperty("user.dir"));
