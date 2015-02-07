@@ -33,12 +33,14 @@ public class HRController implements Initializable
     @FXML
     private void openHire(ActionEvent event) 
     {
+        System.out.println("YOU CLICKED HIRE");
         a.openHireScreen();
     }
 
     @FXML
     private void openFire(ActionEvent event) 
     {
+        System.out.println("YOU CLICKED FIRE");
         a.openFireScreen();
     }
     public void setMainA(MainA a)
