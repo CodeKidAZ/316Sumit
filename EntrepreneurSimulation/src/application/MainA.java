@@ -9,6 +9,7 @@ import java.io.IOException;
 import static java.lang.System.in;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.TreeMap;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,8 +22,10 @@ public class MainA extends Application
      Stage primaryStage;
     private AnchorPane root;
     public static int Number = 0;
-    public static Hashtable<String, Employee> employees = new Hashtable<String,Employee>(); //to store all employee data
-    public static  HashMap<String, Employee> employeesHired = new HashMap<String,Employee>(); // to store all hired employees data
+    public static TreeMap<String, Employee> empTree = new TreeMap<String,Employee>(); //to store all employee data
+    public static  TreeMap<String, Employee> hiredTree = new TreeMap<String,Employee>(); // to store all hired employees data
+    
+    
     
     @Override
     public void start(Stage primaryStage) 
@@ -39,9 +42,10 @@ public class MainA extends Application
                  String name = obj.get("name").toString();
                  int wage = (int)obj.get("wage");
                  Employee empObject = new Employee(name, wage);      //create employee objects
-                 employees.put(name, empObject);                               //store employee object into hashtable
-                 
+                 //employees.put(name, empObject);                               //store employee object into hashtable
+                 empTree.put(name, empObject);
                  //System.out.println(name + " "+wage);
+                 
                 
             }//hashmap
             in.close();
@@ -50,8 +54,8 @@ public class MainA extends Application
         {   //Catch exception if any
             System.err.println("Error: " + e.getMessage());
         } 
-        System.out.println("Employee Size is " +employees.size());
-         System.out.println("Hired Size is " +employeesHired.size());
+        
+         System.out.println("treemap is "+empTree.size());
          
         //Image image = new Image("images/employeeImage.png");
          //ImageView imageView1 = new ImageView("images/employeeImage.png");
