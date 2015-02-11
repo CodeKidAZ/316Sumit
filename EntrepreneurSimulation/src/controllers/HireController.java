@@ -2,7 +2,6 @@ package controllers;
 import application.MainA;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Stack;
@@ -28,13 +27,14 @@ public class HireController implements Initializable
      int s = MainA.empTree.size(); //get the size of Employee Tree Map
     String[] namesArray = new String[s]; //this array will store all Employee Names
     String[] wagesArray = new String[s];
+    Image image;
+ 
+    private ObservableList<Employee> tableData = FXCollections.observableArrayList(); 
+    private TreeMap<String, Label> nameLabels = new TreeMap<String,Label>();
+   
     
-    Stack stack1 = new Stack();
-    private ObservableList<Employee> tableData = FXCollections.observableArrayList();
+
     
-     
-    //protected Hashtable<String, Employee> employees = new Hashtable<String,Employee>();
-    static TreeMap<String, Label> nameLabels = new TreeMap<String,Label>();
     @FXML
     private Label hireTitleLabel;
     @FXML
@@ -139,17 +139,130 @@ public class HireController implements Initializable
     private TableColumn<Employee, Number> wageColumn;
     @FXML
     private Button undoButton;
+    @FXML
+    private Label totalLabel;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        
         //____________________________________________________ Array of names , Array of wages
         createNameArray();
         createWageArray();
-                
+        image = new Image("images/employeeImage.png");
+        createEmployeeImages();
+        createEmployeeLabels();
+        linkImagesToNames();
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());    // -> is lambda expression
+        wageColumn.setCellValueFactory(cellData -> cellData.getValue().getWageProperty()); 
+        totalLabel.setText(" ");
+    }    
+
+    //_______________________________________________ BACK BUTTON
+    @FXML
+    private void backMethod(ActionEvent event) 
+    {
+        System.out.println("YOU CLICKED BACK");
+        a.openHRScreen();
+    }
+   //________________________________________________ DONE BUTTON
+    @FXML
+    private void doneMethod(ActionEvent event) 
+    {
+          for(Employee currentTab : tableData) //remove employees from Employement Tree and put them in Hired Tree
+          {
+              MainA.empTree.remove(currentTab.getName());
+              MainA.hiredTree.put(currentTab.getName(), currentTab);
+              
+              createNameArray();                                        // refresh the array with new names
+              createWageArray();                                       // refresh the array with new wages
+              createEmployeeLabels();                                // show new employees on GUI after they are hired
+              linkImagesToNames();              
+          }
+          System.out.println("Employment Tree is "+MainA.empTree.size());
+          System.out.println("Hired Tree is "+MainA.hiredTree.size());
         
-        //__________________________________________________Shows employee images on GUI
-        Image image = new Image("images/employeeImage.png");
+          totalLabel.setText("You have Hired : "+ tableData.size()+ "           Total Hired : "+ MainA.hiredTree.size());
+         clearTheTable();
+         
+    }
+    //_________________________________________________CLEAR THE TABLE
+    public void clearTheTable()
+    {
+        tableData.removeAll(tableData);                            // remove all nodes from linked list used by TableView
+    }
+
+    public void setMainA(MainA a) 
+    {
+        this.a = a;
+    }
+
+    //________________________________________________ IMAGE CLICK METHOD
+    @FXML
+    private void emp1Clicked(MouseEvent event) throws IOException
+    {   
+        System.out.println("  ");
+        Object source = event.getSource();                                                    // getting the event source object
+        String imageName = ((ImageView) source).getId();                              // converting  the source object to image object and then getting its name
+
+        String employeeName = nameLabels.get(imageName).getText();            // get the employee name
+        int employeeWage = MainA.empTree.get(employeeName).getWage();   // get the employee wage
+        Employee a = new Employee(employeeName, employeeWage);
+         
+        tableData.add(a);                                                                            // add Employee object to linked list 
+        table1.setItems(tableData);                                                             // add the linked list to the TableView
+        totalLabel.setText("You selected : "+ Integer.toString(tableData.size()) + "           Total Hired : "+ MainA.hiredTree.size());              // show total employees clicked to hire
+
+    }
+    
+    //_______________________________________________ CREATE NAME ARRAY 
+    public void createNameArray()
+    {
+        Set<String> setNames = MainA.empTree.keySet();  //get keys from Employee Tree Map
+        int p = 0;
+        for (String key: setNames)
+        {
+            String value = MainA.empTree.get(key).getName();
+            namesArray[p] = value;
+            p++;
+        }
+        
+    }
+    public void createWageArray()
+    {
+         Set<String> setNames = MainA.empTree.keySet();  //get keys from Employee Tree Map
+          int q=0;
+         for (String key: setNames)
+        {
+            String u = Integer.toString(MainA.empTree.get(key).getWage());
+            wagesArray[q] = u;
+            q++;
+        }
+        
+    }
+
+    @FXML
+    private void undoMethod(ActionEvent event) 
+    {
+        int selectedIndex = table1.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) 
+        {
+            table1.getItems().remove(selectedIndex);                               //remove the selected item from TableView
+            totalLabel.setText(Integer.toString(tableData.size()));               // show total employees selected to hire
+            
+            System.out.println("empTree is "+MainA.empTree.size());
+            System.out.println("HireTree is  "+MainA.hiredTree.size());
+            
+        }
+        else
+        {
+            System.out.println(" nothing");
+        }
+    }
+
+    //__________________________________________________Shows employee images on GUI
+    private void createEmployeeImages() 
+    {
         imageEmployee1.setImage(image);
         imageEmployee2.setImage(image);
         imageEmployee3.setImage(image);
@@ -167,8 +280,11 @@ public class HireController implements Initializable
         imageEmployee13.setImage(image);
         imageEmployee14.setImage(image);
         imageEmployee15.setImage(image);
-        
-        //___________________________________________________ Shows employee names on GUI  (2 arrays used here)
+    }
+
+    //___________________________________________________ Shows employee names on GUI  (2 arrays used here)
+    private void createEmployeeLabels() 
+    {
          nameLabel1.setText(namesArray[0]);
          wageLabel1.setText(wagesArray[0]+"/hr");
          nameLabel2.setText(namesArray[1]);
@@ -201,8 +317,12 @@ public class HireController implements Initializable
          wageLabel14.setText(wagesArray[13]+"/hr");
          nameLabel15.setText(namesArray[14]);
          wageLabel15.setText(wagesArray[14]+"/hr");
-           
-         //________________________________________________KEY: ImageName VALUE: LabelName ( 1 Tree Map nameLabels)
+        
+    }
+
+    private void linkImagesToNames() 
+    {
+        //________________________________________________KEY: ImageName VALUE: LabelName ( 1 Tree Map nameLabels)
          nameLabels.put(imageEmployee1.getId(), nameLabel1);
          nameLabels.put(imageEmployee2.getId(), nameLabel2);
          nameLabels.put(imageEmployee3.getId(), nameLabel3);
@@ -220,106 +340,5 @@ public class HireController implements Initializable
          nameLabels.put(imageEmployee13.getId(), nameLabel13);
          nameLabels.put(imageEmployee14.getId(), nameLabel14);
          nameLabels.put(imageEmployee15.getId(), nameLabel15);
-         
-        
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());    // -> is lambda expression
-        wageColumn.setCellValueFactory(cellData -> cellData.getValue().getWageProperty()); 
-    }    
-
-    //_______________________________________________Back button
-    @FXML
-    private void backMethod(ActionEvent event) 
-    {
-        System.out.println("YOU CLICKED BACK");
-        a.openHRScreen();
-    }
-   //________________________________________________Done button
-    @FXML
-    private void doneMethod(ActionEvent event) 
-    {
-        
-    }
-        
-       //MainA.hiredTree.put(nameColumn.getCellData(o));
-       // System.out.println("Your done hiring");
-       
-    
-
-    public void setMainA(MainA a) 
-    {
-        this.a = a;
-    }
-
-    //________________________________________________ Image Click method
-    @FXML
-    private void emp1Clicked(MouseEvent event) throws IOException
-    {   
-        System.out.println("  ");
-        Object source = event.getSource();   // getting the event source object
-        String imageName = ((ImageView) source).getId(); // converting to image object and then getting its name
-
-        String employeeName = nameLabels.get(imageName).getText();  //get the employee name
-        int employeeWage = MainA.empTree.get(employeeName).getWage(); //get the employee wage
-        
-        System.out.println("you hired "+employeeName+" "+ employeeWage);
-        Employee a = new Employee(employeeName, employeeWage);
-              
-        tableData.add(a);
-        table1.setItems(tableData);
-
-        MainA.hiredTree.put(employeeName, a);
-        MainA.empTree.remove(a.getName());
-        System.out.println(" HELLO 1");
-        System.out.println("empTree is "+MainA.empTree.size());
-        System.out.println("HireTree is  "+MainA.hiredTree.size());
-       
-    }
-    
-    public void createNameArray()
-    {
-        Set<String> setNames = MainA.empTree.keySet();  //get keys from Employee Tree Map
-        int p = 0;
-        for (String key: setNames)
-        {
-            String value = MainA.empTree.get(key).getName();
-            namesArray[p] = value;
-            p++;
-            //System.out.println("wages Array length is "+namesArray.length);
-        }
-        
-    }
-    public void createWageArray()
-    {
-         Set<String> setNames = MainA.empTree.keySet();  //get keys from Employee Tree Map
-          int q=0;
-         for (String key: setNames)
-        {
-            String u = Integer.toString(MainA.empTree.get(key).getWage());
-            wagesArray[q] = u;
-            q++;
-        }
-        //System.out.println("wages Array length is "+wagesArray.length);
-        
-    }
-
-    @FXML
-    private void undoMethod(ActionEvent event) 
-    {
-        int selectedIndex = table1.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) 
-        {
-            table1.getItems().remove(selectedIndex);
-            
-            MainA.hiredTree.remove(table1.getSelectionModel().getSelectedItem().getName());
-            MainA.empTree.put(table1.getSelectionModel().getSelectedItem().getName(), table1.getSelectionModel().getSelectedItem());
-            
-            System.out.println("SELECTED ITEM WAS"+table1.getSelectionModel().getSelectedItem().getName());
-            System.out.println("empTree is "+MainA.empTree.size());
-            System.out.println("HireTree is  "+MainA.hiredTree.size());
-        }
-        else
-        {
-            System.out.println(" nothing");
-        }
     }
 }
