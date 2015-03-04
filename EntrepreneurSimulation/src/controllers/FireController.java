@@ -40,21 +40,21 @@ public class FireController implements Initializable
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());    // -> is lambda expression
         wageColumn.setCellValueFactory(cellData -> cellData.getValue().getWageProperty()); 
         
-        System.out.println("hired Tree is : "+ MainA.hiredTree.size());
-        Set<String> setNames = MainA.hiredTree.keySet();  //get keys from Employee Tree Map
+        System.out.println("hired Tree is : "+ HRController.hiredTree.size());
+        Set<String> setNames = HRController.hiredTree.keySet();  //get keys from Employee Tree Map
         System.out.println("Names are " + setNames);
         for (String key: setNames)
         {
             
-            String employeeName = MainA.hiredTree.get(key).getName();
+            String employeeName = HRController.hiredTree.get(key).getName();
              System.out.println("EmployeeNames are " + key);
             
-            int employeeWage = MainA.hiredTree.get(key).getWage();
+            int employeeWage = HRController.hiredTree.get(key).getWage();
             Employee node = new Employee(employeeName, employeeWage);
             tableData.add(node);
         }
         fireTable.setItems(tableData);
-        totalHiredLabel.setText("Total Hired : "+MainA.hiredTree.size());
+        totalHiredLabel.setText("Total Hired : "+HRController.hiredTree.size());
     }    
     public void setMainA(MainA a)
     {
@@ -75,13 +75,13 @@ public class FireController implements Initializable
         if (selectedIndex >= 0) 
         {
             Employee a = new Employee(fireTable.getSelectionModel().getSelectedItem().getName(),fireTable.getSelectionModel().getSelectedItem().getWage());
-            MainA.empTree.put(a.getName(), a);                                            // put the fired employee back into employement tree
-            MainA.hiredTree.remove(fireTable.getSelectionModel().getSelectedItem().getName()); // remove employee from hired tree
+            HRController.empTree.put(a.getName(), a);                                            // put the fired employee back into employement tree
+            HRController.hiredTree.remove(fireTable.getSelectionModel().getSelectedItem().getName()); // remove employee from hired tree
             fireTable.getItems().remove(selectedIndex);                                 //remove the selected item from TableView 
-            totalHiredLabel.setText("Total Hired : "+MainA.hiredTree.size());
+            totalHiredLabel.setText("Total Hired : "+HRController.hiredTree.size());
             
-            System.out.println("empTree is "+MainA.empTree.size());
-            System.out.println("HireTree is  "+MainA.hiredTree.size());
+            System.out.println("empTree is "+HRController.empTree.size());
+            System.out.println("HireTree is  "+HRController.hiredTree.size());
         }
         else
         {

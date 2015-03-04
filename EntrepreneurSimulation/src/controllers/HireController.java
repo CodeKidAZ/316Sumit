@@ -24,7 +24,7 @@ public class HireController implements Initializable
      MainA a;
      Employee val = new Employee();
      Set<String> empObjects;
-     int s = MainA.empTree.size(); //get the size of Employee Tree Map
+     int s = HRController.empTree.size(); //get the size of Employee Tree Map
     String[] namesArray = new String[s]; //this array will store all Employee Names
     String[] wagesArray = new String[s];
     Image image;
@@ -171,19 +171,19 @@ public class HireController implements Initializable
     {
           for(Employee currentTab : tableData) //remove employees from Employement Tree and put them in Hired Tree
           {
-              MainA.empTree.remove(currentTab.getName());
-              MainA.hiredTree.put(currentTab.getName(), currentTab);
+              HRController.empTree.remove(currentTab.getName());
+              HRController.hiredTree.put(currentTab.getName(), currentTab);
               
-              createNameArray();                                        // refresh the array with new names
-              createWageArray();                                       // refresh the array with new wages
+              createNameArray();                                     // refresh the array with new names
+              createWageArray();                                     // refresh the array with new wages
               createEmployeeLabels();                                // show new employees on GUI after they are hired
               linkImagesToNames();              
           }
-          System.out.println("Employment Tree is "+MainA.empTree.size());
-          System.out.println("Hired Tree is "+MainA.hiredTree.size());
+          System.out.println("Employment Tree is "+HRController.empTree.size());
+          System.out.println("Hired Tree is "+HRController.hiredTree.size());
         
-          totalLabel.setText("You have Hired : "+ tableData.size()+ "           Total Hired : "+ MainA.hiredTree.size());
-         clearTheTable();
+          totalLabel.setText("You have Hired : "+ tableData.size()+ "           Total Hired : "+ HRController.hiredTree.size());
+          clearTheTable();
          
     }
     //_________________________________________________CLEAR THE TABLE
@@ -202,39 +202,42 @@ public class HireController implements Initializable
     private void emp1Clicked(MouseEvent event) throws IOException
     {   
         System.out.println("  ");
-        Object source = event.getSource();                                                    // getting the event source object
-        String imageName = ((ImageView) source).getId();                              // converting  the source object to image object and then getting its name
+        Object source = event.getSource();                                    // getting the event source object
+        String imageName = ((ImageView) source).getId();                     // converting  the source object to image object and then getting its name
 
         String employeeName = nameLabels.get(imageName).getText();            // get the employee name
-        int employeeWage = MainA.empTree.get(employeeName).getWage();   // get the employee wage
+        int employeeWage = HRController.empTree.get(employeeName).getWage();  // get the employee wage
         Employee a = new Employee(employeeName, employeeWage);
          
-        tableData.add(a);                                                                            // add Employee object to linked list 
-        table1.setItems(tableData);                                                             // add the linked list to the TableView
-        totalLabel.setText("You selected : "+ Integer.toString(tableData.size()) + "           Total Hired : "+ MainA.hiredTree.size());              // show total employees clicked to hire
+        tableData.add(a);                                                    // add Employee object to linked list 
+        table1.setItems(tableData);                                          // add the linked list to the TableView
+        totalLabel.setText("You selected : "+ Integer.toString(tableData.size()) + "           Total Hired : "+ HRController.hiredTree.size());              // show total employees clicked to hire
 
     }
     
     //_______________________________________________ CREATE NAME ARRAY 
     public void createNameArray()
     {
-        Set<String> setNames = MainA.empTree.keySet();  //get keys from Employee Tree Map
+        Set<String> setNames = HRController.empTree.keySet();  //get keys from Employee Tree Map
         int p = 0;
         for (String key: setNames)
-        {
-            String value = MainA.empTree.get(key).getName();
+        { 
+            System.out.println(key);
+            String value = HRController.empTree.get(key).getName();
             namesArray[p] = value;
-            p++;
+            p++; 
+           
         }
         
     }
+    //_______________________________________________ CREATE WAGE ARRAY
     public void createWageArray()
     {
-         Set<String> setNames = MainA.empTree.keySet();  //get keys from Employee Tree Map
+         Set<String> setNames = HRController.empTree.keySet();  //get keys from Employee Tree Map
           int q=0;
          for (String key: setNames)
         {
-            String u = Integer.toString(MainA.empTree.get(key).getWage());
+            String u = Integer.toString(HRController.empTree.get(key).getWage());
             wagesArray[q] = u;
             q++;
         }
@@ -250,8 +253,8 @@ public class HireController implements Initializable
             table1.getItems().remove(selectedIndex);                               //remove the selected item from TableView
             totalLabel.setText(Integer.toString(tableData.size()));               // show total employees selected to hire
             
-            System.out.println("empTree is "+MainA.empTree.size());
-            System.out.println("HireTree is  "+MainA.hiredTree.size());
+            System.out.println("empTree is "+HRController.empTree.size());
+            System.out.println("HireTree is  "+HRController.hiredTree.size());
             
         }
         else
@@ -282,7 +285,7 @@ public class HireController implements Initializable
         imageEmployee15.setImage(image);
     }
 
-    //___________________________________________________ Shows employee names on GUI  (2 arrays used here)
+    //___________________________________________________ Shows employee names,wage on GUI  (2 arrays used here)
     private void createEmployeeLabels() 
     {
          nameLabel1.setText(namesArray[0]);
@@ -322,7 +325,7 @@ public class HireController implements Initializable
 
     private void linkImagesToNames() 
     {
-        //________________________________________________KEY: ImageName VALUE: LabelName ( 1 Tree Map nameLabels)
+        //________________________________________________KEY: ImageName VALUE: LabelName ( 1 Tree Map called nameLabels)
          nameLabels.put(imageEmployee1.getId(), nameLabel1);
          nameLabels.put(imageEmployee2.getId(), nameLabel2);
          nameLabels.put(imageEmployee3.getId(), nameLabel3);

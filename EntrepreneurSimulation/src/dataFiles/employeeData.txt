@@ -25,3 +25,36 @@
 {"name": "K", "wage": 35}
 {"name": "KK", "wage": 40}
 {"name": "L", "wage": 45}
+{"name": "LL", "wage": 10}
+{"name": "M", "wage": 12}
+{"name": "MM", "wage": 15}
+{"name": "N", "wage":20}
+{"name": "NN", "wage": 22}
+{"name": "O", "wage": 25}
+{"name": "OO", "wage": 30}
+{"name": "P", "wage": 32}
+{"name": "PP", "wage": 35}
+{"name": "Q", "wage": 40}
+{"name": "QQ", "wage": 45}
+{"name": "R", "wage": 10}
+{"name": "RR", "wage": 12}
+{"name": "S", "wage": 15}
+{"name": "SS", "wage":20}
+{"name": "T", "wage": 22}
+{"name": "TT", "wage": 25}
+{"name": "U", "wage": 30}
+{"name": "UU", "wage": 32}
+{"name": "V", "wage": 35}
+{"name": "VV", "wage": 40}
+{"name": "W", "wage": 45}
+{"name": "WW", "wage": 10}
+{"name": "X", "wage": 12}
+{"name": "XX", "wage": 15}
+{"name": "Y", "wage":20}
+{"name": "YY", "wage": 22}
+{"name": "Z", "wage": 25}
+{"name": "ZZ", "wage": 30}
+{"name": "JJ", "wage": 32}
+{"name": "K", "wage": 35}
+{"name": "KK", "wage": 40}
+{"name": "L", "wage": 45}

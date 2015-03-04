@@ -14,48 +14,26 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import CorpProcess.*;
 
 public class MainA extends Application 
 {
-     Stage primaryStage;
+    Stage primaryStage;
     private AnchorPane root;
     public static int Number = 0;
-    public static TreeMap<String, Employee> empTree = new TreeMap<String,Employee>(); //to store all employee data
-    public static  TreeMap<String, Employee> hiredTree = new TreeMap<String,Employee>(); // to store all hired employees data
+    //public static TreeMap<String, Employee> empTree = new TreeMap<String,Employee>(); //to store all employee data
+    //public static  TreeMap<String, Employee> hiredTree = new TreeMap<String,Employee>(); // to store all hired employees data
     
     
     
     @Override
     public void start(Stage primaryStage) 
     {
-        String strLine=" ";
-         try 
-        {
-            BufferedReader br = new BufferedReader(new FileReader("src/dataFiles/employeeData.txt"));
-            
-       
-            while ((strLine = br.readLine()) != null) 
-            {
-                 JSONObject obj = new JSONObject(strLine);                  //extract employee info from datafile
-                 String name = obj.get("name").toString();
-                 int wage = (int)obj.get("wage");
-                 Employee empObject = new Employee(name, wage);      //create employee objects
-                 empTree.put(name, empObject);                                //store employee object into hashtable
-                
-            }
-            in.close();
-        } 
-        catch (Exception e) 
-        {   //Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-            System.out.println("Error "+ strLine);
-        } 
-        
-         System.out.println("treemap is "+empTree.size());
-        
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("The Entreprenuership Game");
-        openHRScreen();
+        //openBuildingChoice();
+        //openHRScreen();
+        openCorpProcess();
     }
     public static void main(String[] args) 
     {
@@ -79,7 +57,6 @@ public class MainA extends Application
             primaryStage.show();
             
            HRController controller = loader.getController();
-           //controller.setMainA(this);
            controller.setMainA(this);
             
         } 
@@ -102,7 +79,7 @@ public class MainA extends Application
             primaryStage.show();
             
             HireController controller = loader.getController();
-           controller.setMainA(this);
+            controller.setMainA(this);
         } 
          catch (IOException e)
          {
@@ -131,9 +108,136 @@ public class MainA extends Application
          }
         
     }
-
-   /*public HashMap<String,Employee> getEmployeeTable()
-   {
-       return employees;
-   }*/
+    //_______________________________________________________ WORKERS LIST SCREEN
+      public void openWorkersListScreen()
+    {
+         try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainA.class.getResource("/fxmlFiles/workersList.fxml"));
+            
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            WorkersListController controller = loader.getController();
+            controller.setMainA(this);
+        } 
+         catch (IOException e)
+         {
+             e.printStackTrace();
+         }
+        
+    }
+      //__________________________________________________CORP PROCESS
+      public void openCorpProcess()
+      {
+           try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainA.class.getResource("/CorpProcess/corp.fxml"));
+            
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            CorpController controller = loader.getController();
+            controller.setMainA(this);
+        } 
+         catch (IOException e)
+         {
+             e.printStackTrace();
+         }
+      }
+      //__________________________________________________CORP PROCESS 2 OF 5   
+       public void openCorpProcess2of5()
+      {
+           try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainA.class.getResource("/CorpProcess/corp2of5.fxml"));
+            
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            Corp2of5Controller controller = loader.getController();
+            controller.setMainA(this);
+        } 
+         catch (IOException e)
+         {
+             e.printStackTrace();
+         }
+      }
+      
+      
+      
+       //__________________________________________________CORP PROCESS 3 OF 5  
+         public void openCorpProcess3of5()
+      {
+           try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainA.class.getResource("/CorpProcess/corp3of5.fxml"));
+            
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            Corp3of5Controller controller = loader.getController();
+            controller.setMainA(this);
+        } 
+         catch (IOException e)
+         {
+             e.printStackTrace();
+         }
+      }
+      
+       //__________________________________________________CORP PROCESS 4 OF 5 
+         public void openCorpProcess4of5()
+      {
+           try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainA.class.getResource("/CorpProcess/corp4of5.fxml"));
+            
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            Corp4of5Controller controller = loader.getController();
+            controller.setMainA(this);
+        } 
+         catch (IOException e)
+         {
+             e.printStackTrace();
+         }
+      }
+      
+       //__________________________________________________CORP PROCESS 5 OF 5    
+         public void openCorpProcess5of5()
+      {
+           try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainA.class.getResource("/CorpProcess/corp5of5.fxml"));
+            
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            Corp5of5Controller controller = loader.getController();
+            controller.setMainA(this);
+        } 
+         catch (IOException e)
+         {
+             e.printStackTrace();
+         }
+      }
 }
