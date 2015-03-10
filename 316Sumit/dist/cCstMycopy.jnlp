@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="cCstMycopy.jar" size="14928631" download="eager" />
+    <jar href="cCstMycopy.jar" size="15053277" download="eager" />
     <jar href="lib/controlsfx-8.0.6_20.jar" size="856539" download="eager" />
     <jar href="lib/jacocoant.jar" size="693775" download="eager" />
     <jar href="lib/jarjar-1.4.jar" size="120575" download="eager" />

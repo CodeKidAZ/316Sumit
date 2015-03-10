@@ -29,8 +29,8 @@ import org.controlsfx.dialog.Dialogs;
 public class HRController extends AnchorPane {
     private Main application;
      private Player player;
-    public static TreeMap<String, Employee> empTree = new TreeMap<String,Employee>(); //to store all employee data
-    public static TreeMap<String, Employee> hiredTree = new TreeMap<String,Employee>(); // to store all hired employees data
+    //public static TreeMap<String, Employee> empTree = new TreeMap<String,Employee>(); //to store all employee data
+    //public static TreeMap<String, Employee> hiredTree = new TreeMap<String,Employee>(); // to store all hired employees data
     
     public static ObservableList<Employee> CompanyList = FXCollections.observableArrayList(); // to store list of companies
     //=========================USER DEFINED VARIABLES========================================
@@ -76,6 +76,7 @@ public class HRController extends AnchorPane {
      //____________________________________________________OPEN HIRE SCREEN
     @FXML
     private void openHire(ActionEvent event) throws Exception {
+        
         System.out.println("YOU CLICKED HIRE");
         HireController ctr = (HireController) application.replaceSceneContent("Hire.fxml", HireController.class);
         ctr.setApp(application);
@@ -107,7 +108,7 @@ public class HRController extends AnchorPane {
         ctr.setPlayer(player);
     }
 
-         //____________________________________________________CREATE COMPANY
+     //____________________________________________________CREATE COMPANY
     @FXML
     private void createCompany(ActionEvent event) {
     
@@ -115,16 +116,16 @@ public class HRController extends AnchorPane {
             .title("HUMAN RESOURCE")
             .masthead("Create a Company")
             .message("Please name your new company.")
-            .showTextInput("MyCompany.Corp");
+            .showTextInput("MyCompanyName");
         
        if(response.isPresent())
        {
            System.out.println("Company Name is " + response.get());
           
        }
-       Employee a = new Employee(response.get(),1);
+       Employee a = new Employee(response.get()+".Corp",0);
        CompanyList.add(a);
-        CompanyTableView.setItems(CompanyList); 
+       CompanyTableView.setItems(CompanyList); 
   
         //wageColumn.setCellValueFactory(cellData -> cellData.getValue().getWageProperty()); 
        

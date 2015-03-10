@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -20,10 +21,12 @@
       <Button fx:id="workersListButt" layoutX="102.0" layoutY="332.0" mnemonicParsing="false" onAction="#openWorkersList" prefHeight="53.0" prefWidth="85.0" text="Workers List" />
       <Button fx:id="incorporateButton" layoutX="102.0" layoutY="420.0" mnemonicParsing="false" onAction="#openCorpScreen" prefHeight="53.0" prefWidth="85.0" text="Incorporate" />
       <Button fx:id="createCompanyButton" layoutX="256.0" layoutY="155.0" mnemonicParsing="false" onAction="#createCompany" prefHeight="53.0" prefWidth="110.0" text="Create Company" />
-      <TableView fx:id="CompanyTableView" layoutX="517.0" layoutY="155.0" prefHeight="200.0" prefWidth="247.0">
+      <TableView fx:id="CompanyTableView" layoutX="517.0" layoutY="155.0" prefHeight="200.0" prefWidth="432.0">
         <columns>
           <TableColumn fx:id="companyNameColumn" prefWidth="154.0" text="Company Name" />
           <TableColumn fx:id="employeesColumn" prefWidth="92.0" text="Employees" />
+            <TableColumn fx:id="employeesColumn1" prefWidth="92.0" text="CEO" />
+            <TableColumn fx:id="employeesColumn11" prefWidth="92.0" text="Market Share" />
         </columns>
       </TableView>
 
