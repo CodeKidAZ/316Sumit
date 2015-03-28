@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -10,34 +11,40 @@
    <children>
       <GridPane alignment="CENTER" layoutX="47.0" layoutY="49.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <RadioButton mnemonicParsing="false" selected="true" text="Player #1">
+            <RadioButton mnemonicParsing="false" selected="true" text="Player #1" GridPane.rowIndex="1">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <toggleGroup>
                   <ToggleGroup fx:id="playerToggleGroup" />
                </toggleGroup></RadioButton>
-            <RadioButton mnemonicParsing="false" text="Player #2" toggleGroup="$playerToggleGroup" GridPane.rowIndex="1">
+            <RadioButton mnemonicParsing="false" text="Player #2" toggleGroup="$playerToggleGroup" GridPane.rowIndex="2">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></RadioButton>
-            <RadioButton mnemonicParsing="false" text="Player #3" toggleGroup="$playerToggleGroup" GridPane.rowIndex="2">
+            <RadioButton mnemonicParsing="false" text="Player #3" toggleGroup="$playerToggleGroup" GridPane.rowIndex="3">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></RadioButton>
-            <RadioButton mnemonicParsing="false" text="Player #4" toggleGroup="$playerToggleGroup" GridPane.rowIndex="3">
+            <RadioButton mnemonicParsing="false" text="Player #4" toggleGroup="$playerToggleGroup" GridPane.rowIndex="4">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></RadioButton>
-            <Button fx:id="continueBtn" mnemonicParsing="false" text="Continue" GridPane.rowIndex="4">
+            <Button fx:id="continueBtn" mnemonicParsing="false" text="Continue" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin></Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select your player">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children>
          <columnConstraints>
             <ColumnConstraints />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />

@@ -37,7 +37,8 @@ public class Main extends Application {
             stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			LoginController ctr = (LoginController) replaceSceneContent("Login.fxml", LoginController.class);
+			//LoginController ctr = (LoginController) replaceSceneContent("Login.fxml", LoginController.class
+                                                LandingController ctr = (LandingController) replaceSceneContent("Landing.fxml", LandingController.class);
                                                 //LoginController ctr = (LoginController) replaceSceneContent("Login.fxml");
 			ctr.setApp(this);
 		} catch(Exception e) {
